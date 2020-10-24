@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<launch>
+<node name="camera_process" pkg="dv_task" type="camera_process.py" output="screen" />
+<node type="rviz" name="rviz" pkg="rviz" args="-d $(find dv_task)/rviz/rviz_config.rviz" />
+</launch>
