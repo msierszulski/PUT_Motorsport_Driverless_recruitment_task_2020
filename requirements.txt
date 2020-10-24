@@ -1,0 +1,5 @@
+numpy>=1.16.6
+opencv-python>=3.2.0
+pyyaml>=5.3.1
+rospkg>=1.2.3
+rospy>=1.14.9
