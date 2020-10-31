@@ -28,11 +28,12 @@ class Camera:
         Image
             ROS sensor message.
         """
-        ### Task - convert image array to ROS Image message
-        ### Hint - use CVBridge ROS package to convert cv2 array to Image message.
-
+               
         img_msg = None
 
+        bridge = CvBridge()
+        img_msg = bridge.cv2_to_imgmsg(img_array, encoding="passthrough")  
+        
         return img_msg
 
     def publish_camera_image(self, image):
@@ -42,12 +43,12 @@ class Camera:
         ----------
         image : np.array
             Image array.
+        
         """
-        ### Task - publish Image message for camera image.
-        ### Hint - convert cv2 to Image message before publish.
-
         img_msg = None
 
+        img_msg = self.array2imgmsg(image)
+        
         if img_msg is None:
             raise NotImplementedError
 
@@ -61,11 +62,10 @@ class Camera:
         edge_image : np.array
             Image array.
         """
-        ### Task - publish Image message for edge image.
-        ### Hint - convert cv2 to Image message before publish.
-
         img_msg = None
 
+        img_msg = self.array2imgmsg(edge_image)
+        
         if img_msg is None:
             raise NotImplementedError
 
@@ -83,10 +83,7 @@ if __name__ == '__main__':
 
         cam.publish_camera_image(frame)
 
-        ### Task - convert image to grayscale and detect edges.
-        ### Hint - use Canny edge detector to get edges from image.
-
-        edge = np.zeros_like(frame)
+        edge = cv2.Canny(frame,100,200)
 
         cam.publish_edge_image(edge)
 
